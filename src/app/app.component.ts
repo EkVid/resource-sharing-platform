@@ -9,5 +9,14 @@ import { RouterOutlet } from '@angular/router';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'resource-sharing-platform';
+  title = 'Title for this resource sharing platform';
+
+  onGetStarted() {
+    alert('Get started clicked!');
+  }
+  onLearnMore() {
+    alert('Learn more clicked!');
+  }  
 }
+
+
