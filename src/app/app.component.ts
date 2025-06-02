@@ -6,6 +6,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { filter } from 'rxjs/operators';
+import { ThemeService } from './services/theme.service';
 
 @Component({
   selector: 'app-root',
@@ -20,7 +21,7 @@ import { filter } from 'rxjs/operators';
     MatMenuModule
   ],
   template: `
-    <mat-toolbar color="primary">
+    <mat-toolbar [class.dark-theme]="isDarkMode$ | async" color="primary">
       <span routerLink="/" style="cursor: pointer">UofT Resource Hub</span>
       <span style="flex: 1 1 auto"></span>
       
@@ -31,7 +32,15 @@ import { filter } from 'rxjs/operators';
         <button mat-button (click)="scrollToSection('how-it-works')">How It Works</button>
       </div>
 
-      <button mat-raised-button color="accent">Sign Up</button>
+      <button mat-raised-button color="accent" 
+              *ngIf="!isVerificationPage && !isAuthPage" 
+              routerLink="/signup" 
+              class="hide-mobile">Sign Up</button>
+
+      <!-- Theme Toggle - Always visible in desktop, hidden in mobile for home page -->
+      <button mat-icon-button (click)="toggleTheme()" class="theme-toggle" [class.hide-mobile]="isHomePage">
+        <mat-icon>{{(isDarkMode$ | async) ? 'light_mode' : 'dark_mode'}}</mat-icon>
+      </button>
 
       <!-- Mobile Navigation - Only shown on home page -->
       <button mat-icon-button [matMenuTriggerFor]="mobileMenu" class="mobile-menu-button" *ngIf="isHomePage">
@@ -50,13 +59,19 @@ import { filter } from 'rxjs/operators';
           <mat-icon>help_outline</mat-icon>
           <span>How It Works</span>
         </button>
-        <button mat-menu-item>
+        <button mat-menu-item routerLink="/signup">
           <mat-icon>person_add</mat-icon>
           <span>Sign Up</span>
         </button>
+        <button mat-menu-item (click)="toggleTheme()">
+          <mat-icon>{{(isDarkMode$ | async) ? 'light_mode' : 'dark_mode'}}</mat-icon>
+          <span>{{(isDarkMode$ | async) ? 'Light Mode' : 'Dark Mode'}}</span>
+        </button>
       </mat-menu>
     </mat-toolbar>
-    <router-outlet></router-outlet>
+    <div class="app-container" [class.dark-theme]="isDarkMode$ | async">
+      <router-outlet></router-outlet>
+    </div>
   `,
   styles: [`
     mat-toolbar {
@@ -68,6 +83,11 @@ import { filter } from 'rxjs/operators';
       background-color: #002A5C !important;
       padding: 0 16px;
       height: 64px;
+      transition: all 0.3s ease;
+
+      &.dark-theme {
+        background-color: #001A3C !important;
+      }
     }
     
     .desktop-nav {
@@ -80,10 +100,24 @@ import { filter } from 'rxjs/operators';
       display: none;
       margin-left: 16px;
     }
+
+    .theme-toggle {
+      margin-left: 16px;
+    }
     
     button[color="accent"] {
       background-color: #E31837 !important;
       margin-left: 16px;
+    }
+
+    .app-container {
+      min-height: 100vh;
+      transition: all 0.3s ease;
+      background-color: #f5f5f5;
+
+      &.dark-theme {
+        background-color: #121212;
+      }
     }
 
     @media (max-width: 768px) {
@@ -94,18 +128,39 @@ import { filter } from 'rxjs/operators';
       .mobile-menu-button {
         display: block;
       }
+
+      .theme-toggle.hide-mobile {
+        display: none;
+      }
+
+      .hide-mobile {
+        display: none;
+      }
+    }
+
+    :host {
+      display: block;
+      min-height: 100vh;
     }
   `]
 })
 export class AppComponent {
   isHomePage = false;
+  isVerificationPage = false;
+  isAuthPage = false;
+  isDarkMode$ = this.themeService.darkMode$;
 
-  constructor(private router: Router) {
+  constructor(
+    private router: Router,
+    private themeService: ThemeService
+  ) {
     // Subscribe to router events to detect current route
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
     ).subscribe((event: any) => {
       this.isHomePage = event.url === '/' || event.url === '/home';
+      this.isVerificationPage = event.url === '/verification';
+      this.isAuthPage = event.url === '/signup' || event.url === '/login';
     });
   }
 
@@ -114,6 +169,10 @@ export class AppComponent {
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
+  }
+
+  toggleTheme() {
+    this.themeService.toggleDarkMode();
   }
 }
 

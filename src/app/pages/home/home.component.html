@@ -3,7 +3,7 @@
 <div id="home" class="hero-section">
   <div class="hero-content">
     <h1>Share & Discover UofT Resources</h1>
-    <p>share study materials, and access a wealth of academic resources - no login required to browse!</p>
+    <p>Share study materials, and access a wealth of academic resources - no login required to browse! <span class="access-note">(Access requires verification with your UofT email)</span></p>
     <div class="hero-buttons">
       <button mat-raised-button color="accent" (click)="onGetStarted()">Browse Resources</button>
     </div>
@@ -146,7 +146,7 @@
   <h2>Ready to Contribute?</h2>
   <p>Join thousands of UofT students already sharing and accessing resources. Sign up to unlock more resources and get access to share your own!</p>
   <div class="cta-buttons">
-    <button mat-raised-button color="accent" class="cta-button">Sign Up Now</button>
+    <button mat-raised-button color="accent" class="cta-button" routerLink="/signup">Sign Up Now</button>
     <button mat-stroked-button color="accent" class="browse-button" (click)="onGetStarted()">Browse Resources</button>
   </div>
 </div> 

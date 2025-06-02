@@ -4,6 +4,13 @@ $uoft-light-blue: #8EABD0;
 $uoft-accent: #E31837;
 $uoft-grey: #E5E5E5;
 
+// Dark theme variables
+$dark-bg: #121212;
+$dark-card-bg: #1e1e1e;
+$dark-text: #ffffff;
+$dark-secondary-text: rgba(255, 255, 255, 0.7);
+$dark-divider: rgba(255, 255, 255, 0.12);
+
 :host {
     display: block;
 }
@@ -81,6 +88,10 @@ $uoft-grey: #E5E5E5;
     position: relative;
     overflow: hidden;
 
+    :host-context(.dark-theme) & {
+        background: linear-gradient(135deg, darken($uoft-royal-blue, 10%) 0%, darken($uoft-light-blue, 20%) 100%);
+    }
+
     &::after {
         content: '';
         position: absolute;
@@ -108,6 +119,14 @@ $uoft-grey: #E5E5E5;
             font-size: 1.5rem;
             margin-bottom: 32px;
             opacity: 0.9;
+
+            .access-note {
+                display: block;
+                font-size: 1.1rem;
+                margin-top: 8px;
+                opacity: 0.8;
+                font-style: italic;
+            }
         }
 
         .hero-buttons {
@@ -143,6 +162,18 @@ $uoft-grey: #E5E5E5;
     padding: 80px 24px;
     background-color: #f8f9fa;
 
+    :host-context(.dark-theme) & {
+        background-color: $dark-bg;
+
+        h2 {
+            color: $uoft-light-blue;
+        }
+
+        .section-subtitle {
+            color: $dark-secondary-text;
+        }
+    }
+
     h2 {
         text-align: center;
         font-size: 2.5rem;
@@ -175,6 +206,36 @@ $uoft-grey: #E5E5E5;
         transition: transform 0.3s ease, box-shadow 0.3s ease;
         background-color: white;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+        :host-context(.dark-theme) & {
+            background-color: $dark-card-bg;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            border: 1px solid $dark-divider;
+
+            mat-icon {
+                color: $uoft-light-blue;
+            }
+
+            mat-card-title {
+                color: $uoft-light-blue;
+            }
+
+            mat-card-content {
+                p {
+                    color: $dark-secondary-text;
+                }
+
+                .resource-list {
+                    li {
+                        color: $dark-secondary-text;
+
+                        &::before {
+                            color: $uoft-light-blue;
+                        }
+                    }
+                }
+            }
+        }
 
         &:hover {
             transform: translateY(-5px);
@@ -243,6 +304,40 @@ $uoft-grey: #E5E5E5;
 .how-it-works-section {
     padding: 80px 24px;
     background-color: white;
+
+    :host-context(.dark-theme) & {
+        background-color: $dark-bg;
+
+        .section-header {
+            h2 {
+                color: $uoft-light-blue;
+            }
+
+            .section-subtitle {
+                color: $dark-secondary-text;
+            }
+        }
+
+        .steps-container {
+            .step {
+                mat-icon {
+                    color: $uoft-light-blue;
+                }
+
+                h3 {
+                    color: $uoft-light-blue;
+                }
+
+                p {
+                    color: $dark-secondary-text;
+                }
+            }
+
+            .step-divider {
+                border-color: $dark-divider;
+            }
+        }
+    }
 
     .section-header {
         text-align: center;
@@ -489,6 +584,57 @@ $uoft-grey: #E5E5E5;
 .browse-section {
     padding: 80px 24px;
     background-color: #f8f9fa;
+
+    :host-context(.dark-theme) & {
+        background-color: $dark-bg;
+
+        .section-header {
+            h2 {
+                color: $uoft-light-blue;
+            }
+
+            .section-subtitle {
+                color: $dark-secondary-text;
+            }
+        }
+
+        .popular-resources {
+            .resource-preview {
+                background-color: $dark-card-bg;
+                border: 1px solid $dark-divider;
+
+                mat-card-header {
+                    mat-icon {
+                        color: $uoft-light-blue;
+                    }
+
+                    mat-card-title {
+                        color: $uoft-light-blue;
+                    }
+
+                    mat-card-subtitle {
+                        color: $dark-secondary-text;
+                    }
+                }
+
+                mat-card-content {
+                    p {
+                        color: $dark-secondary-text;
+                    }
+                }
+
+                mat-card-actions {
+                    button {
+                        color: $uoft-accent;
+                    }
+                }
+
+                &:hover {
+                    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+                }
+            }
+        }
+    }
 
     .section-header {
         text-align: center;

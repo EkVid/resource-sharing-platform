@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, HostBinding, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterOutlet, Router } from '@angular/router';
+import { RouterOutlet, Router, RouterModule } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -8,6 +8,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatMenuModule } from '@angular/material/menu';
+import { ThemeService } from '../../services/theme.service';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'app-home',
@@ -15,6 +17,7 @@ import { MatMenuModule } from '@angular/material/menu';
     imports: [
         CommonModule,
         RouterOutlet,
+        RouterModule,
         MatToolbarModule,
         MatButtonModule,
         MatCardModule,
@@ -26,8 +29,29 @@ import { MatMenuModule } from '@angular/material/menu';
     templateUrl: './home.component.html',
     styleUrls: ['./home.component.scss']
 })
-export class HomeComponent {
-    constructor(private router: Router) { }
+export class HomeComponent implements OnInit, OnDestroy {
+    private isDarkThemeValue = false;
+    private themeSubscription = new Subscription();
+
+    @HostBinding('class.dark-theme')
+    get isDarkTheme() {
+        return this.isDarkThemeValue;
+    }
+
+    constructor(
+        private router: Router,
+        private themeService: ThemeService
+    ) { }
+
+    ngOnInit() {
+        this.themeSubscription = this.themeService.darkMode$.subscribe(
+            isDark => this.isDarkThemeValue = isDark
+        );
+    }
+
+    ngOnDestroy() {
+        this.themeSubscription.unsubscribe();
+    }
 
     scrollToSection(sectionId: string) {
         const element = document.getElementById(sectionId);
@@ -37,7 +61,7 @@ export class HomeComponent {
     }
 
     onGetStarted() {
-        this.router.navigate(['/courses']);
+        this.router.navigate(['/verification']);
     }
 
     onLearnMore() {

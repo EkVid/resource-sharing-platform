@@ -74,3 +74,171 @@ body {
     border-color: #E31837 !important;
     color: #E31837 !important;
 }
+
+// Light theme
+$light-primary: mat.define-palette(mat.$blue-palette, 700);
+$light-accent: mat.define-palette(mat.$red-palette, 700);
+$light-theme: mat.define-light-theme((color: (primary: $light-primary,
+                accent: $light-accent )));
+
+// Dark theme
+$dark-primary: mat.define-palette(mat.$blue-grey-palette, 200);
+$dark-accent: mat.define-palette(mat.$red-palette, 400);
+$dark-theme: mat.define-dark-theme((color: (primary: $dark-primary,
+                accent: $dark-accent )));
+
+// Apply the light theme by default
+@include mat.core();
+@include mat.all-component-themes($light-theme);
+
+// Dark theme styles
+.dark-theme {
+    @include mat.all-component-colors($dark-theme);
+    background-color: #121212;
+    color: #ffffff;
+
+    // Card styles
+    .mat-mdc-card {
+        background-color: #1e1e1e;
+        color: #ffffff;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    // Form field styles
+    .mat-mdc-form-field {
+        .mat-mdc-text-field-wrapper {
+            background-color: #2d2d2d;
+        }
+
+        .mat-mdc-form-field-label {
+            color: rgba(255, 255, 255, 0.7);
+        }
+    }
+
+    // Expansion panel styles
+    .mat-expansion-panel {
+        background-color: #1e1e1e;
+        color: #ffffff;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    // Chip styles
+    .mat-mdc-chip {
+        &.mat-mdc-standard-chip {
+            background-color: #2d2d2d;
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+    }
+
+    // Button styles
+    .mat-mdc-raised-button {
+        &.mat-primary {
+            background-color: #001A3C;
+        }
+
+        &.mat-accent {
+            background-color: #E31837 !important;
+        }
+    }
+
+    // Menu styles
+    .mat-mdc-menu-panel {
+        background-color: #1e1e1e;
+
+        .mat-mdc-menu-item {
+            color: #ffffff;
+
+            &:hover {
+                background-color: #2d2d2d;
+            }
+        }
+    }
+
+    // Input styles
+    .mat-mdc-input-element {
+        color: #ffffff;
+
+        &::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+    }
+
+    // Custom classes
+    .course-card {
+        background-color: #1e1e1e;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+
+        .mat-mdc-card-title {
+            color: #8EABD0;
+        }
+
+        .mat-mdc-card-subtitle {
+            color: #cccccc;
+        }
+
+        p {
+            color: #e0e0e0;
+        }
+    }
+
+    .search-section {
+        background-color: #1e1e1e;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .filters-accordion {
+        .mat-expansion-panel {
+            background-color: #2d2d2d;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+    }
+
+    .materials-info {
+        h4 {
+            color: #8EABD0;
+        }
+
+        .mat-mdc-chip {
+            background-color: #2d2d2d !important;
+            color: #8EABD0 !important;
+            border: 1px solid rgba(255, 255, 255, 0.1) !important;
+        }
+    }
+
+    // Scrollbar styles
+    ::-webkit-scrollbar {
+        width: 12px;
+        height: 12px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: #1e1e1e;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background-color: #3d3d3d;
+        border-radius: 6px;
+        border: 3px solid #1e1e1e;
+    }
+}
+
+// Base styles
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body {
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    background-color: #f5f5f5;
+    transition: all 0.3s ease;
+
+    &.dark-theme {
+        background-color: #121212;
+        color: #ffffff;
+    }
+}

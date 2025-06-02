@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostBinding } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -13,6 +13,8 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { FormControl, FormGroup } from '@angular/forms';
+import { ThemeService } from '../../services/theme.service';
+import { Subscription } from 'rxjs';
 
 interface Course {
     code: string;
@@ -52,7 +54,7 @@ interface FilterGroup {
     template: `
     <div class="courses-page">
       <!-- Search and Filter Section -->
-      <div class="search-section">
+      <div class="search-section" [class.dark-theme]="isDarkTheme">
         <mat-form-field class="search-field" appearance="outline">
           <mat-label>Search courses</mat-label>
           <input matInput [formControl]="searchControl" placeholder="e.g., CSC148, Calculus, Computer Science...">
@@ -60,7 +62,7 @@ interface FilterGroup {
         </mat-form-field>
 
         <mat-accordion class="filters-accordion" multi>
-          <mat-expansion-panel>
+          <mat-expansion-panel [class.dark-theme]="isDarkTheme">
             <mat-expansion-panel-header>
               <mat-panel-title>
                 <mat-icon>school</mat-icon>
@@ -79,7 +81,7 @@ interface FilterGroup {
             </div>
           </mat-expansion-panel>
 
-          <mat-expansion-panel>
+          <mat-expansion-panel [class.dark-theme]="isDarkTheme">
             <mat-expansion-panel-header>
               <mat-panel-title>
                 <mat-icon>format_list_numbered</mat-icon>
@@ -98,7 +100,7 @@ interface FilterGroup {
             </div>
           </mat-expansion-panel>
 
-          <mat-expansion-panel>
+          <mat-expansion-panel [class.dark-theme]="isDarkTheme">
             <mat-expansion-panel-header>
               <mat-panel-title>
                 <mat-icon>location_on</mat-icon>
@@ -117,7 +119,7 @@ interface FilterGroup {
             </div>
           </mat-expansion-panel>
 
-          <mat-expansion-panel>
+          <mat-expansion-panel [class.dark-theme]="isDarkTheme">
             <mat-expansion-panel-header>
               <mat-panel-title>
                 <mat-icon>category</mat-icon>
@@ -136,7 +138,7 @@ interface FilterGroup {
             </div>
           </mat-expansion-panel>
 
-          <mat-expansion-panel>
+          <mat-expansion-panel [class.dark-theme]="isDarkTheme">
             <mat-expansion-panel-header>
               <mat-panel-title>
                 <mat-icon>library_books</mat-icon>
@@ -155,7 +157,7 @@ interface FilterGroup {
             </div>
           </mat-expansion-panel>
 
-          <mat-expansion-panel>
+          <mat-expansion-panel [class.dark-theme]="isDarkTheme">
             <mat-expansion-panel-header>
               <mat-panel-title>
                 <mat-icon>sort</mat-icon>
@@ -185,7 +187,7 @@ interface FilterGroup {
 
       <!-- Courses Grid -->
       <div class="courses-grid">
-        <mat-card *ngFor="let course of filteredCourses" class="course-card">
+        <mat-card *ngFor="let course of filteredCourses" class="course-card" [class.dark-theme]="isDarkTheme">
           <mat-card-header>
             <mat-icon mat-card-avatar>school</mat-icon>
             <mat-card-title>{{course.code}}</mat-card-title>
@@ -220,7 +222,15 @@ interface FilterGroup {
   `,
     styleUrls: ['./courses.component.scss']
 })
-export class CoursesComponent implements OnInit {
+export class CoursesComponent implements OnInit, OnDestroy {
+    private isDarkThemeValue = false;
+    private themeSubscription = new Subscription();
+
+    @HostBinding('class.dark-theme')
+    get isDarkTheme() {
+        return this.isDarkThemeValue;
+    }
+
     searchControl = new FormControl('');
     sortControl = new FormControl('code');
 
@@ -294,10 +304,21 @@ export class CoursesComponent implements OnInit {
 
     filteredCourses: Course[] = [];
 
+    constructor(private themeService: ThemeService) { }
+
     ngOnInit() {
         this.initializeFilterForm();
         this.filteredCourses = this.courses;
         this.setupFilterSubscriptions();
+
+        // Subscribe to theme changes
+        this.themeSubscription = this.themeService.darkMode$.subscribe(
+            isDark => this.isDarkThemeValue = isDark
+        );
+    }
+
+    ngOnDestroy() {
+        this.themeSubscription.unsubscribe();
     }
 
     private initializeFilterForm() {

@@ -1,3 +1,16 @@
+// UofT Colors
+$uoft-royal-blue: #002A5C;
+$uoft-light-blue: #8EABD0;
+$uoft-accent: #E31837;
+
+// Dark theme variables
+$dark-bg: #121212;
+$dark-card-bg: #1e1e1e;
+$dark-text: #ffffff;
+$dark-secondary-text: rgba(255, 255, 255, 0.7);
+$dark-divider: rgba(255, 255, 255, 0.12);
+$dark-hover: #2d2d2d;
+
 .courses-page {
     padding: 80px 24px 24px;
     max-width: 1200px;
@@ -10,6 +23,92 @@
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     margin-bottom: 24px;
+    transition: all 0.3s ease;
+
+    &.dark-theme {
+        background: $dark-card-bg;
+        border: 1px solid $dark-divider;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+
+        .mat-mdc-form-field {
+            .mat-mdc-text-field-wrapper {
+                background-color: $dark-hover;
+            }
+
+            .mat-mdc-form-field-label {
+                color: $dark-secondary-text;
+            }
+
+            .mat-mdc-input-element {
+                color: $dark-text;
+            }
+        }
+
+        .mat-mdc-select-value {
+            color: $dark-text;
+        }
+
+        .mat-mdc-select-arrow {
+            color: $dark-secondary-text;
+        }
+
+        .mat-mdc-option {
+            color: $dark-text;
+        }
+
+        ::ng-deep {
+            .mdc-text-field {
+                background-color: $dark-hover;
+
+                .mdc-text-field__input {
+                    color: $dark-text !important;
+
+                    &::placeholder {
+                        color: $dark-secondary-text !important;
+                    }
+                }
+
+                .mdc-floating-label {
+                    color: $dark-secondary-text;
+                }
+            }
+
+            .mdc-select__selected-text {
+                color: $dark-text !important;
+            }
+
+            .mat-mdc-select-panel {
+                background: $dark-card-bg;
+
+                .mat-mdc-option {
+                    color: $dark-text;
+
+                    &:hover {
+                        background: $dark-hover;
+                    }
+                }
+            }
+
+            .mat-mdc-checkbox {
+                .mdc-checkbox__native-control:enabled:not(:checked)~.mdc-checkbox__background {
+                    border-color: $dark-secondary-text;
+                }
+
+                .mdc-checkbox__native-control:enabled:checked~.mdc-checkbox__background {
+                    border-color: $uoft-light-blue;
+                    background-color: $uoft-light-blue;
+                }
+
+                .mdc-checkbox__native-control:enabled~.mdc-checkbox__background .mdc-checkbox__checkmark {
+                    color: $dark-text;
+                }
+
+                .mdc-label {
+                    color: $dark-text;
+                }
+            }
+        }
+    }
 
     .search-field {
         width: 100%;
@@ -23,6 +122,49 @@
             .mat-expansion-panel {
                 background: #f5f5f5;
                 margin-bottom: 8px;
+                transition: all 0.3s ease;
+
+                &.dark-theme {
+                    background: $dark-hover;
+                    border: 1px solid $dark-divider;
+
+                    .mat-expansion-panel-header {
+                        &:hover {
+                            background: lighten($dark-hover, 5%);
+                        }
+
+                        .mat-expansion-panel-header-title {
+                            color: $uoft-light-blue;
+
+                            mat-icon {
+                                color: $uoft-light-blue;
+                            }
+                        }
+
+                        .mat-expansion-panel-header-description {
+                            color: $dark-secondary-text;
+                        }
+                    }
+
+                    .mat-expansion-panel-body {
+                        color: $dark-text;
+                    }
+
+                    mat-checkbox {
+                        color: $dark-text;
+
+                        .mdc-checkbox__background {
+                            border-color: $dark-secondary-text;
+                        }
+
+                        &.mat-mdc-checkbox-checked {
+                            .mdc-checkbox__background {
+                                background-color: $uoft-light-blue;
+                                border-color: $uoft-light-blue;
+                            }
+                        }
+                    }
+                }
 
                 &:last-child {
                     margin-bottom: 0;
@@ -37,19 +179,19 @@
                     }
 
                     .mat-expansion-panel-header-title {
-                        color: #002A5C;
+                        color: $uoft-royal-blue;
                         font-weight: 500;
                         display: flex;
                         align-items: center;
                         gap: 8px;
 
                         mat-icon {
-                            color: #002A5C;
+                            color: $uoft-royal-blue;
                         }
                     }
 
                     .mat-expansion-panel-header-description {
-                        color: #8EABD0;
+                        color: $uoft-light-blue;
                         font-size: 12px;
                         margin-right: 0;
                     }
@@ -86,8 +228,13 @@
         }
 
         mat-chip {
-            background-color: #8EABD0 !important;
+            background-color: $uoft-light-blue !important;
             color: white !important;
+
+            .mat-icon {
+                color: white !important;
+                opacity: 0.8;
+            }
         }
     }
 }
@@ -102,17 +249,129 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-    transition: transform 0.2s ease-in-out;
+    transition: all 0.3s ease;
+    background: white;
+
+    &.dark-theme {
+        background: $dark-card-bg;
+        border: 1px solid $dark-divider;
+
+        mat-card-header {
+            mat-card-title {
+                color: $uoft-light-blue;
+            }
+
+            mat-card-subtitle {
+                color: $dark-secondary-text;
+            }
+
+            mat-icon {
+                color: $uoft-light-blue;
+            }
+        }
+
+        mat-card-content {
+            p {
+                color: $dark-text;
+            }
+
+            .update-info {
+                color: $dark-secondary-text;
+
+                mat-icon {
+                    color: $dark-secondary-text;
+                }
+            }
+        }
+
+        .materials-info {
+            h4 {
+                color: $uoft-light-blue;
+            }
+
+            mat-chip {
+                background-color: $dark-hover !important;
+                color: $uoft-light-blue !important;
+                border: 1px solid $dark-divider;
+            }
+        }
+
+        .course-info {
+            mat-chip {
+                background-color: $dark-hover !important;
+                color: $uoft-light-blue !important;
+                border: 1px solid $dark-divider;
+            }
+        }
+
+        mat-card-actions {
+            button {
+                color: $dark-text !important;
+            }
+        }
+
+        &:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+        }
+
+        ::ng-deep {
+            .mat-mdc-chip {
+                background-color: $dark-hover !important;
+                color: $dark-text !important;
+                border: 1px solid $dark-divider;
+
+                &.mat-mdc-chip-selected {
+                    background-color: $uoft-light-blue !important;
+                }
+
+                .mat-mdc-chip-action-label {
+                    color: $dark-text;
+                }
+            }
+
+            .mdc-evolution-chip__text-label {
+                color: $dark-text !important;
+            }
+
+            .mat-mdc-standard-chip {
+                background-color: $dark-hover;
+
+                &:not(.mdc-evolution-chip--disabled) {
+                    color: $dark-text;
+                }
+            }
+        }
+
+        .course-info {
+            mat-chip {
+                background-color: $uoft-light-blue !important;
+                color: $dark-text !important;
+            }
+        }
+
+        .materials-info {
+            mat-chip {
+                background-color: $dark-hover !important;
+                color: $dark-text !important;
+            }
+        }
+    }
 
     &:hover {
         transform: translateY(-4px);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
     }
 
     mat-card-header {
         margin-bottom: 16px;
 
         mat-card-title {
-            color: #002A5C;
+            color: $uoft-royal-blue;
+        }
+
+        mat-icon {
+            color: $uoft-royal-blue;
         }
     }
 
@@ -144,7 +403,7 @@
 
     .course-info {
         mat-chip {
-            background-color: #8EABD0 !important;
+            background-color: $uoft-light-blue !important;
             color: white !important;
         }
     }
@@ -152,15 +411,15 @@
     .materials-info {
         h4 {
             margin: 0 0 8px 0;
-            color: #002A5C;
+            color: $uoft-royal-blue;
             font-size: 14px;
             font-weight: 500;
         }
 
         mat-chip {
             background-color: #E8F0F8 !important;
-            color: #002A5C !important;
-            border: 1px solid #8EABD0;
+            color: $uoft-royal-blue !important;
+            border: 1px solid $uoft-light-blue;
         }
     }
 
@@ -184,8 +443,27 @@
         justify-content: flex-end;
 
         button {
-            background-color: #E31837 !important;
+            background-color: $uoft-accent !important;
             color: white !important;
+        }
+    }
+}
+
+.active-filters {
+    ::ng-deep {
+        .mat-mdc-chip {
+            &.mdc-evolution-chip {
+                background-color: $uoft-light-blue !important;
+
+                .mdc-evolution-chip__text-label {
+                    color: $dark-text !important;
+                }
+
+                .mdc-evolution-chip__icon--trailing {
+                    color: $dark-text !important;
+                    opacity: 0.8;
+                }
+            }
         }
     }
 }
@@ -198,54 +476,6 @@
 
     .search-section {
         padding: 16px;
-
-        .filters-accordion {
-            margin-bottom: 16px;
-
-            ::ng-deep {
-                .mat-expansion-panel {
-                    background: #f5f5f5;
-                    margin-bottom: 8px;
-
-                    &:last-child {
-                        margin-bottom: 0;
-                    }
-
-                    .mat-expansion-panel-header {
-                        height: 48px;
-                        padding: 0 16px;
-
-                        &:hover {
-                            background: #e0e0e0;
-                        }
-
-                        .mat-expansion-panel-header-title {
-                            color: #002A5C;
-                            font-weight: 500;
-                            display: flex;
-                            align-items: center;
-                            gap: 8px;
-
-                            mat-icon {
-                                color: #002A5C;
-                            }
-                        }
-
-                        .mat-expansion-panel-header-description {
-                            color: #8EABD0;
-                            font-size: 12px;
-                            margin-right: 0;
-                        }
-                    }
-
-                    .mat-expansion-panel-content {
-                        .mat-expansion-panel-body {
-                            padding: 16px;
-                        }
-                    }
-                }
-            }
-        }
     }
 
     .courses-grid {
