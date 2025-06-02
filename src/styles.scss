@@ -1,0 +1,76 @@
+@use '@angular/material' as mat;
+
+// Custom Palettes
+$uoft-accent: (
+    50: #fde5e8,
+    100: #f9bec6,
+    200: #f593a1,
+    300: #f0677c,
+    400: #ed4661,
+    500: #E31837,
+    // Our main accent color
+    600: #d11531,
+    700: #bc1129,
+    800: #a70e22,
+    900: #820815,
+    contrast: (50: rgba(black, 0.87),
+        100: rgba(black, 0.87),
+        200: rgba(black, 0.87),
+        300: white,
+        400: white,
+        500: white,
+        600: white,
+        700: white,
+        800: white,
+        900: white,
+    )
+);
+
+// Define the palettes
+$my-primary: mat.define-palette(mat.$indigo-palette, 900); // UofT Blue
+$my-accent: mat.define-palette($uoft-accent, 500);
+$my-warn: mat.define-palette(mat.$red-palette);
+
+// Create the theme
+$my-theme: mat.define-light-theme((color: (primary: $my-primary,
+                accent: $my-accent,
+                warn: $my-warn,
+            ),
+            typography: mat.define-typography-config(),
+            density: 0,
+        ));
+
+// Apply the theme
+@include mat.all-component-themes($my-theme);
+
+/* You can add global styles to this file, and also import other style files */
+html,
+body {
+    height: 100%;
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+// Override Material button styles if needed
+.mat-mdc-raised-button.mat-accent {
+    background-color: #E31837 !important;
+
+    &:hover {
+        background-color: darken(#E31837, 5%) !important;
+    }
+}
+
+.mat-mdc-button.mat-accent {
+    color: #E31837 !important;
+}
+
+.mat-mdc-stroked-button.mat-accent {
+    border-color: #E31837 !important;
+    color: #E31837 !important;
+}

@@ -1,0 +1,152 @@
+<!-- Remove home-nav since it's in app component -->
+
+<div id="home" class="hero-section">
+  <div class="hero-content">
+    <h1>Share & Discover UofT Resources</h1>
+    <p>share study materials, and access a wealth of academic resources - no login required to browse!</p>
+    <div class="hero-buttons">
+      <button mat-raised-button color="accent" (click)="onGetStarted()">Browse Resources</button>
+    </div>
+  </div>
+</div>
+
+<div id="features" class="features-section">
+  <div class="section-header">
+    <h2>Discover Everything You Need</h2>
+    <p class="section-subtitle">Your one-stop platform for all UofT academic resources</p>
+  </div>
+  <div class="features-grid">
+    <mat-card>
+      <mat-icon color="primary">description</mat-icon>
+      <mat-card-header>
+        <mat-card-title>Past Exams</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p>Access previous year exams with solutions from various courses across all departments.</p>
+        <ul class="resource-list">
+          <li>Midterm examinations</li>
+          <li>Final exams with solutions</li>
+          <li>Practice problem sets</li>
+          <li>Exam preparation guides</li>
+        </ul>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card>
+      <mat-icon color="primary">assignment</mat-icon>
+      <mat-card-header>
+        <mat-card-title>Course Materials</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p>Find comprehensive course materials to support your learning journey.</p>
+        <ul class="resource-list">
+          <li>Detailed course syllabi</li>
+          <li>Weekly lecture slides</li>
+          <li>Tutorial materials</li>
+          <li>Required readings</li>
+        </ul>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card>
+      <mat-icon color="primary">edit_note</mat-icon>
+      <mat-card-header>
+        <mat-card-title>Student Notes</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p>Access high-quality notes shared by top-performing students.</p>
+        <ul class="resource-list">
+          <li>Lecture notes & summaries</li>
+          <li>Study guides</li>
+          <li>Concept explanations</li>
+          <li>Formula sheets</li>
+        </ul>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+
+<div id="how-it-works" class="how-it-works-section">
+  <div class="section-header">
+    <h2>How It Works</h2>
+    <p class="section-subtitle">Start exploring resources in three simple steps</p>
+  </div>
+  <div class="steps-container">
+    <div class="step">
+      <mat-icon>search</mat-icon>
+      <h3>Browse Resources</h3>
+      <p>Search through our extensive collection of academic materials without creating an account.</p>
+    </div>
+    <mat-divider [vertical]="true" class="step-divider"></mat-divider>
+    <div class="step">
+      <mat-icon>preview</mat-icon>
+      <h3>Preview Content</h3>
+      <p>View detailed descriptions and previews of materials to find exactly what you need.</p>
+    </div>
+    <mat-divider [vertical]="true" class="step-divider"></mat-divider>
+    <div class="step">
+      <mat-icon>download</mat-icon>
+      <h3>Access Materials</h3>
+      <p>Download or view resources directly. Sign up to unlock additional features and contribute.</p>
+    </div>
+  </div>
+</div>
+
+<div class="browse-section">
+  <div class="section-header">
+    <h2>Popular Resources</h2>
+    <p class="section-subtitle">Start exploring our most accessed materials</p>
+  </div>
+  <div class="popular-resources">
+    <mat-card class="resource-preview">
+      <mat-card-header>
+        <mat-icon mat-card-avatar>school</mat-icon>
+        <mat-card-title>CSC148 Winter 2023</mat-card-title>
+        <mat-card-subtitle>Introduction to Computer Science</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <p>Complete course materials including lecture slides, practice problems, and past midterms.</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button color="accent">View</button>
+      </mat-card-actions>
+    </mat-card>
+
+    <mat-card class="resource-preview">
+      <mat-card-header>
+        <mat-icon mat-card-avatar>functions</mat-icon>
+        <mat-card-title>MAT137 Study Guide</mat-card-title>
+        <mat-card-subtitle>Calculus with Proofs</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <p>Comprehensive study guide with practice problems and step-by-step solutions.</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button color="accent">View</button>
+      </mat-card-actions>
+    </mat-card>
+
+    <mat-card class="resource-preview">
+      <mat-card-header>
+        <mat-icon mat-card-avatar>psychology</mat-icon>
+        <mat-card-title>PSY100 Notes Collection</mat-card-title>
+        <mat-card-subtitle>Introduction to Psychology</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <p>Student-compiled notes covering all major topics with exam preparation tips.</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button color="accent">View</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
+
+<div class="cta-section">
+  <h2>Ready to Contribute?</h2>
+  <p>Join thousands of UofT students already sharing and accessing resources. Sign up to unlock more resources and get access to share your own!</p>
+  <div class="cta-buttons">
+    <button mat-raised-button color="accent" class="cta-button">Sign Up Now</button>
+    <button mat-stroked-button color="accent" class="browse-button" (click)="onGetStarted()">Browse Resources</button>
+  </div>
+</div> 

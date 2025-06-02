@@ -1,0 +1,597 @@
+// UofT Colors
+$uoft-royal-blue: #002A5C;
+$uoft-light-blue: #8EABD0;
+$uoft-accent: #E31837;
+$uoft-grey: #E5E5E5;
+
+:host {
+    display: block;
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background-color: $uoft-royal-blue !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    padding: 0 16px;
+    height: 64px;
+
+    .spacer {
+        flex: 1 1 auto;
+    }
+
+    .desktop-nav {
+        display: flex;
+        align-items: center;
+
+        button {
+            margin-left: 16px;
+        }
+    }
+
+    .mobile-menu-button {
+        display: none;
+        margin-left: 8px;
+    }
+
+    .sign-up-button {
+        margin-left: 16px;
+        background-color: $uoft-accent !important;
+        color: white;
+        min-width: 100px;
+
+        &:hover {
+            background-color: darken($uoft-accent, 5%) !important;
+        }
+    }
+}
+
+// Mobile styles for navbar
+@media (max-width: 768px) {
+    .navbar {
+        padding: 0 8px;
+
+        .desktop-nav {
+            display: none;
+        }
+
+        .mobile-menu-button {
+            display: block;
+        }
+
+        .sign-up-button {
+            margin-left: 8px;
+            padding: 0 16px;
+            min-width: 80px;
+        }
+    }
+}
+
+.hero-section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, $uoft-royal-blue 0%, $uoft-light-blue 100%);
+    color: white;
+    padding: 80px 24px 24px;
+    position: relative;
+    overflow: hidden;
+
+    &::after {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: url('/assets/uoft-pattern.svg') repeat;
+        opacity: 0.1;
+        z-index: 1;
+    }
+
+    .hero-content {
+        text-align: center;
+        max-width: 800px;
+        position: relative;
+        z-index: 2;
+
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 24px;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        p {
+            font-size: 1.5rem;
+            margin-bottom: 32px;
+            opacity: 0.9;
+        }
+
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+
+            button {
+                padding: 8px 32px;
+                font-size: 1.1rem;
+                transition: transform 0.3s ease;
+                border-radius: 25px;
+
+                &:hover {
+                    transform: translateY(-2px);
+                }
+
+                &.mat-raised-button {
+                    background-color: $uoft-accent !important;
+                    color: white;
+
+                    &:hover {
+                        background-color: darken($uoft-accent, 5%) !important;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.features-section {
+    padding: 80px 24px;
+    background-color: #f8f9fa;
+
+    h2 {
+        text-align: center;
+        font-size: 2.5rem;
+        margin-bottom: 16px;
+        color: $uoft-royal-blue;
+    }
+
+    .section-subtitle {
+        text-align: center;
+        font-size: 1.2rem;
+        color: #666;
+        margin-bottom: 48px;
+    }
+
+    .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 24px;
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 16px;
+    }
+
+    mat-card {
+        height: 100%;
+        padding: 24px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        background-color: white;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+        &:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+        }
+
+        mat-icon {
+            font-size: 48px;
+            height: 48px;
+            width: 48px;
+            margin-bottom: 24px;
+            color: $uoft-royal-blue;
+        }
+
+        mat-card-header {
+            text-align: center;
+            margin-bottom: 16px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
+        mat-card-title {
+            font-size: 1.5rem;
+            color: $uoft-royal-blue;
+            margin: 0;
+        }
+
+        mat-card-content {
+            text-align: left;
+            width: 100%;
+
+            p {
+                font-size: 1.1rem;
+                color: #666;
+                line-height: 1.6;
+                margin-bottom: 20px;
+                text-align: center;
+            }
+        }
+
+        .resource-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+
+            li {
+                padding: 8px 0 8px 28px;
+                position: relative;
+                color: #555;
+                font-size: 1rem;
+                line-height: 1.4;
+
+                &::before {
+                    content: '✓';
+                    position: absolute;
+                    left: 0;
+                    color: $uoft-royal-blue;
+                    font-weight: bold;
+                }
+            }
+        }
+    }
+}
+
+.how-it-works-section {
+    padding: 80px 24px;
+    background-color: white;
+
+    .section-header {
+        text-align: center;
+        margin-bottom: 60px;
+
+        h2 {
+            font-size: 2.5rem;
+            color: $uoft-royal-blue;
+            margin-bottom: 16px;
+        }
+    }
+
+    .steps-container {
+        display: flex;
+        justify-content: space-around;
+        align-items: stretch;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 24px;
+        gap: 24px;
+
+        .step {
+            flex: 1;
+            text-align: center;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            mat-icon {
+                font-size: 48px;
+                height: 48px;
+                width: 48px;
+                color: $uoft-royal-blue;
+                margin-bottom: 24px;
+            }
+
+            h3 {
+                font-size: 1.5rem;
+                color: $uoft-royal-blue;
+                margin-bottom: 16px;
+            }
+
+            p {
+                font-size: 1.1rem;
+                color: #666;
+                line-height: 1.6;
+                max-width: 300px;
+            }
+        }
+
+        .step-divider {
+            height: 200px;
+            margin: 0;
+        }
+    }
+}
+
+.cta-section {
+    padding: 80px 24px;
+    text-align: center;
+    background: linear-gradient(45deg, $uoft-royal-blue, darken($uoft-light-blue, 20%));
+    color: white;
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('/assets/uoft-pattern.svg') repeat;
+        opacity: 0.1;
+        z-index: 1;
+    }
+
+    h2 {
+        font-size: 2.5rem;
+        margin-bottom: 24px;
+        color: white;
+        position: relative;
+        z-index: 2;
+    }
+
+    p {
+        font-size: 1.2rem;
+        margin-bottom: 32px;
+        opacity: 0.9;
+        position: relative;
+        z-index: 2;
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .cta-buttons {
+        position: relative;
+        z-index: 2;
+        display: flex;
+        justify-content: center;
+        gap: 16px;
+        flex-wrap: wrap;
+
+        button {
+            padding: 12px 48px;
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+            min-width: 200px;
+            border-radius: 25px;
+
+            &:hover {
+                transform: translateY(-2px);
+            }
+
+            &.cta-button {
+                background-color: $uoft-accent !important;
+                color: white;
+
+                &:hover {
+                    background-color: darken($uoft-accent, 5%) !important;
+                }
+            }
+
+            &.browse-button {
+                border-color: white;
+                color: white;
+            }
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .navbar {
+        padding: 0 8px;
+
+        button {
+            margin-left: 8px;
+            padding: 0 8px;
+        }
+    }
+
+    .hero-section {
+        padding-top: 100px;
+        min-height: calc(100vh - 64px);
+
+        .hero-content {
+            h1 {
+                font-size: 2.2rem;
+            }
+
+            p {
+                font-size: 1.1rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: stretch;
+
+                button {
+                    margin: 8px 0;
+                    width: 100%;
+                    max-width: 250px;
+                    margin-left: auto;
+                    margin-right: auto;
+                    padding: 8px 24px;
+                    font-size: 1rem;
+                    border-radius: 50px;
+                }
+            }
+        }
+    }
+
+    .features-section {
+        padding: 60px 16px;
+
+        h2 {
+            font-size: 2rem;
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+        }
+
+        .features-grid {
+            padding: 0;
+        }
+    }
+
+    .how-it-works-section {
+        padding: 60px 16px;
+
+        .steps-container {
+            flex-direction: column;
+            padding: 0;
+
+            .step {
+                padding: 16px;
+                margin-bottom: 32px;
+
+                &:last-child {
+                    margin-bottom: 0;
+                }
+
+                p {
+                    max-width: none;
+                }
+            }
+
+            .step-divider {
+                display: none;
+            }
+        }
+    }
+
+    .cta-section {
+        padding: 60px 16px;
+
+        h2 {
+            font-size: 2rem;
+        }
+
+        p {
+            font-size: 1.1rem;
+        }
+
+        .cta-buttons {
+            flex-direction: column;
+            align-items: center;
+
+            button {
+                margin: 8px 0;
+                width: 100%;
+                max-width: 250px;
+                padding: 8px 24px;
+                font-size: 1rem;
+                border-radius: 50px;
+            }
+        }
+    }
+}
+
+.browse-section {
+    padding: 80px 24px;
+    background-color: #f8f9fa;
+
+    .section-header {
+        text-align: center;
+        margin-bottom: 48px;
+
+        h2 {
+            font-size: 2.5rem;
+            color: $uoft-royal-blue;
+            margin-bottom: 16px;
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: #666;
+        }
+    }
+
+    .popular-resources {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 24px;
+        max-width: 1200px;
+        margin: 0 auto;
+
+        .resource-preview {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+            &:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+            }
+
+            mat-card-header {
+                margin-bottom: 16px;
+
+                mat-icon {
+                    color: $uoft-royal-blue;
+                }
+
+                mat-card-title {
+                    font-size: 1.3rem;
+                    color: $uoft-royal-blue;
+                    margin-bottom: 8px;
+                }
+
+                mat-card-subtitle {
+                    color: #666;
+                }
+            }
+
+            mat-card-content {
+                flex: 1;
+
+                p {
+                    color: #555;
+                    line-height: 1.6;
+                    margin-bottom: 16px;
+                }
+            }
+
+            mat-card-actions {
+                padding: 16px;
+                display: flex;
+                justify-content: flex-end;
+
+                button {
+                    min-width: 120px;
+                    color: $uoft-accent;
+                }
+            }
+        }
+    }
+}
+
+// Mobile styles
+@media (max-width: 768px) {
+    .browse-section {
+        padding: 60px 16px;
+
+        .section-header {
+            h2 {
+                font-size: 2rem;
+            }
+
+            .section-subtitle {
+                font-size: 1.1rem;
+            }
+        }
+
+        .popular-resources {
+            grid-template-columns: 1fr;
+            gap: 16px;
+
+            .resource-preview {
+                mat-card-actions {
+                    button {
+                        width: 100%;
+                    }
+                }
+            }
+        }
+    }
+}
